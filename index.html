@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prakhar Dubey — Computer Science Student</title>
+<meta name="description" content="Prakhar Dubey — B.Sc. Computer Science student in Mumbai, building websites, learning Python and AI-assisted workflows, and working across marketing, leadership, and performance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12142b;
+    --muted:#5b5f72;
+    --bg:#ffffff;
+    --bg-alt:#f5f5fc;
+    --line:#e4e4f0;
+
+    --accent:#4b3df6;
+    --accent-dark:#372dc9;
+    --accent-tint:#ece9fe;
+
+    --green:#1f9d55;
+    --amber:#d97e1a;
+
+    --max-w:840px;
+    --gutter:clamp(20px, 5vw, 40px);
+    --mono:'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  html,body{ max-width:100%; overflow-x:hidden; }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size:16px;
+    line-height:1.65;
+  }
+
+  h1,h2,h3{
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    line-height:1.25;
+    margin:0;
+    color:var(--ink);
+  }
+
+  a{ color:var(--accent); text-decoration:none; }
+  a:hover{ color:var(--accent-dark); text-decoration:underline; }
+  img{ max-width:100%; display:block; }
+  ul{ margin:0; padding:0; list-style:none; }
+  p{ margin:0; }
+
+  .wrap{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding-left:var(--gutter);
+    padding-right:var(--gutter);
+  }
+
+  /* ============ NAV ============ */
+  header.site-nav{
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(6px);
+    z-index:10;
+  }
+  .nav-inner{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:16px var(--gutter);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px 24px;
+  }
+  .brand{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:1rem;
+    color:var(--ink);
+  }
+  .brand .dot{ color:var(--accent); }
+  nav.nav-links{ display:flex; gap:22px; flex-wrap:wrap; }
+  nav.nav-links a{
+    font-size:0.92rem;
+    font-weight:500;
+    color:var(--ink);
+  }
+  nav.nav-links a:hover{ color:var(--accent); text-decoration:none; }
+
+  /* ============ BUTTONS ============ */
+  .btn{
+    display:inline-block;
+    padding:11px 20px;
+    border-radius:6px;
+    font-weight:600;
+    font-size:0.94rem;
+    border:1.5px solid var(--ink);
+    color:var(--ink);
+  }
+  .btn:hover{ text-decoration:none; }
+  .btn-primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
+  .btn-primary:hover{ background:var(--accent-dark); border-color:var(--accent-dark); color:#fff; }
+  .btn-outline:hover{ border-color:var(--accent); color:var(--accent); }
+  .btn-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+
+  /* ============ HERO ============ */
+  .hero{ padding:56px 0 60px; border-bottom:1px solid var(--line); }
+  .hero p.kicker{ color:var(--muted); font-size:0.95rem; margin-bottom:10px; }
+  .hero h1{ font-size:clamp(1.9rem, 4.4vw, 2.6rem); }
+  .hero .lede{ margin-top:16px; max-width:60ch; color:var(--muted); font-size:1.02rem; }
+
+  .terminal{
+    margin-top:32px;
+    background:var(--ink);
+    border-radius:10px;
+    overflow:hidden;
+    max-width:600px;
+    box-shadow:0 10px 30px rgba(18,20,43,0.16);
+  }
+  .terminal-bar{
+    display:flex;
+    gap:7px;
+    padding:11px 14px;
+    background:#1d2040;
+  }
+  .terminal-bar span{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .terminal-bar span:nth-child(1){ background:#ff5f57; }
+  .terminal-bar span:nth-child(2){ background:#febc2e; }
+  .terminal-bar span:nth-child(3){ background:#28c840; }
+  .terminal-body{
+    font-family:var(--mono);
+    font-size:0.86rem;
+    color:#d8daf0;
+    padding:18px 20px 22px;
+    line-height:1.85;
+  }
+  .terminal-body .prompt{ color:#8b93ff; }
+  .terminal-body .out{ color:#a6a9c4; }
+  .terminal-body .cursor{
+    display:inline-block;
+    width:7px; height:15px;
+    background:#8b93ff;
+    margin-left:2px;
+    vertical-align:middle;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+  @media (prefers-reduced-motion:reduce){ .terminal-body .cursor{ animation:none; } }
+
+  /* ============ SECTION SCAFFOLD ============ */
+  section{ padding:56px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  section.alt{ background:var(--bg-alt); }
+  .section-head{ margin-bottom:28px; }
+  .section-head h2{ font-size:1.5rem; }
+  .section-head p{ margin-top:10px; color:var(--muted); max-width:60ch; }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.82rem;
+    font-weight:500;
+    color:var(--accent);
+    display:block;
+    margin-bottom:8px;
+  }
+
+  /* ============ ABOUT ============ */
+  .about p{ margin-bottom:16px; color:var(--ink); max-width:65ch; }
+  .about p:last-child{ margin-bottom:0; }
+
+  .fact-list{ margin-top:24px; }
+  .fact-row{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:10px 0;
+    border-top:1px solid var(--line);
+    font-size:0.94rem;
+  }
+  .fact-row dt{ color:var(--muted); }
+  .fact-row dd{ margin:0; font-weight:600; text-align:right; }
+
+  /* ============ EDUCATION ============ */
+  .timeline{ position:relative; padding-left:26px; }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:5px; top:6px; bottom:6px;
+    width:2px;
+    background:var(--line);
+  }
+  .edu-item{ position:relative; padding-bottom:26px; }
+  .edu-item:last-child{ padding-bottom:0; }
+  .edu-item::before{
+    content:"";
+    position:absolute;
+    left:-26px; top:5px;
+    width:10px; height:10px;
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-tint);
+  }
+  .edu-year{ font-family:var(--mono); font-size:0.82rem; color:var(--accent); }
+  .edu-item h3{ font-size:1.05rem; margin:4px 0 2px; }
+  .edu-org{ color:var(--muted); font-size:0.94rem; }
+
+  /* ============ SKILLS ============ */
+  .skill-group{ margin-bottom:28px; }
+  .skill-group:last-child{ margin-bottom:0; }
+  .skill-group h3{ font-size:1rem; margin-bottom:4px; }
+  .skill-group .skill-note{ font-size:0.88rem; color:var(--muted); margin-bottom:12px; }
+  .tag-list{ display:flex; flex-wrap:wrap; gap:9px; }
+  .tag{
+    font-family:var(--mono);
+    font-size:0.83rem;
+    padding:7px 12px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:6px;
+    color:var(--ink);
+  }
+  .tag small{ color:var(--muted); margin-left:6px; font-family:'Inter',sans-serif; }
+  section.alt .tag{ background:var(--bg); }
+
+  /* ============ PROJECTS ============ */
+  .project{ padding:26px 0; border-top:1px solid var(--line); }
+  .project:first-child{ border-top:none; }
+  .project-top{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .project h3{ font-size:1.15rem; }
+  .status{ font-size:0.82rem; font-weight:600; display:inline-flex; align-items:center; gap:6px; }
+  .status .dot{ width:7px; height:7px; border-radius:50%; display:inline-block; }
+  .status.live{ color:var(--green); }
+  .status.live .dot{ background:var(--green); }
+  .status.done{ color:var(--accent); }
+  .status.done .dot{ background:var(--accent); }
+  .status.progress{ color:var(--amber); }
+  .status.progress .dot{ background:var(--amber); }
+  .project .role{ font-size:0.86rem; color:var(--muted); margin-top:4px; }
+  .project p.desc{ margin-top:12px; color:var(--ink); max-width:65ch; }
+  .project .tools{ margin-top:12px; display:flex; flex-wrap:wrap; gap:7px; }
+  .project .tools span{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--muted);
+    background:var(--bg-alt);
+    padding:4px 9px;
+    border-radius:5px;
+  }
+  section.alt .project .tools span{ background:#fff; }
+  .project .link{ display:inline-block; margin-top:12px; font-size:0.92rem; font-weight:600; }
+
+  /* ============ SIMPLE ENTRY LIST (experience/creative) ============ */
+  .entry{ padding:18px 0; border-top:1px solid var(--line); }
+  .entry:first-child{ border-top:none; }
+  .entry h3{ font-size:1rem; margin-bottom:4px; }
+  .entry p{ color:var(--muted); max-width:65ch; font-size:0.96rem; }
+
+  /* ============ ACHIEVEMENTS ============ */
+  .ach-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .ach-item{
+    padding:18px 20px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    border-left:3px solid var(--accent);
+    background:#fff;
+  }
+  .ach-item h3{ font-size:0.98rem; margin-bottom:4px; }
+  .ach-item p{ color:var(--muted); font-size:0.92rem; }
+
+  /* ============ FUTURE ============ */
+  .future-cols{ display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .future-cols h3{ font-family:var(--mono); font-size:0.92rem; color:var(--accent); margin-bottom:12px; }
+  .future-cols ul li{ position:relative; padding-left:16px; margin-bottom:9px; color:var(--ink); font-size:0.95rem; }
+  .future-cols ul li::before{ content:"›"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+
+  /* ============ CONTACT / FOOTER ============ */
+  footer.contact{ padding:56px 0 40px; background:var(--ink); color:#fff; }
+  footer.contact .eyebrow{ color:#a6a9ff; }
+  footer.contact h2{ color:#fff; font-size:1.6rem; }
+  footer.contact .section-head p{ color:#b7b9d6; }
+  .contact-list{ margin-top:24px; }
+  .contact-row{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:13px 0;
+    border-top:1px solid #2b2e52;
+    font-size:0.95rem;
+  }
+  .contact-row:first-child{ border-top:none; }
+  .contact-row .label{ color:#9598c2; font-family:var(--mono); font-size:0.85rem; }
+  .contact-row a.value{ color:#fff; font-weight:600; }
+  .contact-row a.value:hover{ color:#a6a9ff; }
+  .foot-note{ margin-top:32px; font-size:0.85rem; color:#8285ab; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:600px){
+    .future-cols, .ach-grid{ grid-template-columns:1fr; }
+    .fact-row, .contact-row{ flex-direction:column; gap:2px; }
+    .fact-row dd, .contact-row .value{ text-align:left; }
+    .terminal-body{ font-size:0.78rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">prakhar<span class="dot">.</span>dev</a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker">Mumbai, India</p>
+      <h1>Computer science by degree. Builder, communicator, and performer by habit.</h1>
+      <p class="lede">Second-year B.Sc. Computer Science student learning web development, Python fundamentals, and AI-assisted workflows — while running a live website, leading teams, taking on marketing gigs, and drawing on years of stage, screen, and athletics experience.</p>
+
+      <div class="terminal" aria-hidden="false">
+        <div class="terminal-bar"><span></span><span></span><span></span></div>
+        <div class="terminal-body">
+          <div><span class="prompt">$</span> whoami</div>
+          <div class="out">Prakhar Dubey — B.Sc. Computer Science student, Mumbai</div>
+          <div style="margin-top:10px;"><span class="prompt">$</span> ls skills/</div>
+          <div class="out">web-dev  python  ai-tools  marketing  leadership  performance  athletics</div>
+          <div style="margin-top:10px;"><span class="prompt">$</span> highlights</div>
+          <div class="out">- built &amp; maintain a live website, start to finish</div>
+          <div class="out">- led a school team of ~15 for a stage production</div>
+          <div class="out">- featured as a child actor on national TV</div>
+          <div class="out">- district-level athletics medalist</div>
+          <div style="margin-top:10px;"><span class="prompt">$</span> status</div>
+          <div class="out">open to internships, freelance work &amp; gigs<span class="cursor"></span></div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <a href="#work" class="btn btn-primary">View my work</a>
+        <a href="https://github.com/prakharok" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+        <a href="https://www.linkedin.com/in/prakhar-dubey-918361343/" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">// about</span><h2>A short introduction</h2></div>
+      <div class="about">
+        <p>I'm a second-year Computer Science student at Thakur College of Science and Commerce, Mumbai, currently building my technical foundation — learning Python fundamentals, working comfortably in HTML and Git, and getting used to AI-assisted workflows with tools like ChatGPT, Gemini, and Claude.</p>
+        <p>Alongside coursework, I run a live website end-to-end for a home-tutoring business — from writing the code to setting it up on Google Search Console and requesting indexing — and pick up social-media and marketing tasks for college events, including reaching out to brands for festival sponsorships.</p>
+        <p>Before computer science, I spent years in front of a camera and on stage: as a child actor on national television, and later writing, directing, and acting in a school drama production. I've also competed in athletics and boxing at the district level. Different rooms, same instinct — show up prepared, take responsibility, and get the work done.</p>
+      </div>
+      <div class="fact-list">
+        <div class="fact-row"><dt>Based in</dt><dd>Mumbai, India</dd></div>
+        <div class="fact-row"><dt>Studying</dt><dd>B.Sc. Computer Science</dd></div>
+        <div class="fact-row"><dt>Year</dt><dd>Second year, expected 2028</dd></div>
+        <div class="fact-row"><dt>Currently learning</dt><dd>Python, AI-assisted workflows</dd></div>
+        <div class="fact-row"><dt>Open to</dt><dd>Internships &amp; freelance work</dd></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EDUCATION ============ -->
+  <section id="education" class="alt">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">// education</span><h2>The path so far</h2></div>
+      <div class="timeline">
+        <div class="edu-item">
+          <span class="edu-year">2023</span>
+          <h3>SSC</h3>
+          <p class="edu-org">Thakur High School &amp; Junior College</p>
+        </div>
+        <div class="edu-item">
+          <span class="edu-year">2025</span>
+          <h3>HSC</h3>
+          <p class="edu-org">Thakur High School &amp; Junior College</p>
+        </div>
+        <div class="edu-item">
+          <span class="edu-year">Second year · Expected 2028</span>
+          <h3>B.Sc. Computer Science</h3>
+          <p class="edu-org">Thakur College of Science and Commerce, Mumbai</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">// skills</span>
+        <h2>What I work with</h2>
+        <p>A mix of technical skills I'm actively building, AI tools I use day to day, and the transferable skills that carry across everything else I do.</p>
+      </div>
+
+      <div class="skill-group">
+        <h3>Technical</h3>
+        <p class="skill-note">Currently learning and building with</p>
+        <div class="tag-list">
+          <span class="tag">Python<small>beginner</small></span>
+          <span class="tag">C<small>very basic</small></span>
+          <span class="tag">HTML<small>comfortable</small></span>
+          <span class="tag">Git &amp; GitHub<small>comfortable</small></span>
+          <span class="tag">GitHub Pages<small>comfortable</small></span>
+          <span class="tag">Google Search Console<small>practical use</small></span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>AI-assisted tools</h3>
+        <p class="skill-note">Used regularly in my workflow</p>
+        <div class="tag-list">
+          <span class="tag">ChatGPT</span>
+          <span class="tag">Gemini</span>
+          <span class="tag">Claude</span>
+          <span class="tag">Google Docs &amp; Sheets</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Transferable &amp; creative</h3>
+        <p class="skill-note">Built through leadership and performance</p>
+        <div class="tag-list">
+          <span class="tag">Public speaking</span>
+          <span class="tag">Leadership</span>
+          <span class="tag">Writing</span>
+          <span class="tag">Project coordination</span>
+          <span class="tag">Creative ideation</span>
+          <span class="tag">Digital research</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS / WORK ============ -->
+  <section id="work" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">// projects</span>
+        <h2>Things I've built</h2>
+        <p>A small but real set of practical work — from a live site I maintain, to a marketing exercise, to the beginner project I'm learning Python on right now.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3>Hindi Home Tutor Website</h3>
+          <span class="status live"><span class="dot"></span>Live</span>
+        </div>
+        <p class="role">Role: Sole builder &amp; maintainer</p>
+        <p class="desc">A live public website for Santosh Dubey Tutorials, a home-tutoring business. I coded and published the site, solved implementation issues along the way, and handled it end-to-end — then connected it to Google Search Console, verified ownership, and requested Google indexing.</p>
+        <div class="tools"><span>HTML</span><span>GitHub</span><span>GitHub Pages</span><span>Search Console</span><span>ChatGPT</span><span>Gemini</span><span>Claude</span></div>
+        <a class="link" href="https://prakharok.github.io/hindi-tutor-website/" target="_blank" rel="noopener">View live site →</a>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3>GigLearn Social Media Project</h3>
+          <span class="status done"><span class="dot"></span>Completed &amp; verified</span>
+        </div>
+        <p class="role">Role: Campaign planner</p>
+        <p class="desc">A practical, verified social-media campaign exercise. I built a campaign brief, a post ladder, captions, a reel script, and a WhatsApp broadcast plan, then prepared and submitted deliverables using Google Docs, Sheets, and Drive.</p>
+        <div class="tools"><span>Google Docs</span><span>Google Sheets</span><span>Google Drive</span></div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3>Python Projects</h3>
+          <span class="status progress"><span class="dot"></span>Basic → improving</span>
+        </div>
+        <p class="role">Role: Learner &amp; builder</p>
+        <p class="desc">Small programs I'm building as I learn Python fundamentals — starting with a calculator that covers variables, input, data types, arithmetic operators, and type conversion, with more projects added as my skills grow.</p>
+        <div class="tools"><span>Python</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE / LEADERSHIP ============ -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">// leadership &amp; experience</span><h2>Where I've taken responsibility</h2></div>
+      <div class="entry">
+        <h3>Team Leadership — School Stage Production</h3>
+        <p>Led a school team of around 15 students for a stage programme: helped shape the idea, planned rehearsals, and directed the group to a winning performance.</p>
+      </div>
+      <div class="entry">
+        <h3>College Festival Marketing</h3>
+        <p>Part of a marketing team contacting brands by email and in person, communicating partnership opportunities and helping bring sponsors to college fests.</p>
+      </div>
+      <div class="entry">
+        <h3>Coding Club</h3>
+        <p>Active member participating in technical learning and collaborative activities with fellow students.</p>
+      </div>
+      <div class="entry">
+        <h3>Student &amp; Youth Events</h3>
+        <p>Helped organize and support campus youth events alongside coursework and other commitments.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CREATIVE / PERFORMANCE ============ -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">// creative &amp; performance</span>
+        <h2>The other side of the work</h2>
+        <p>Before and alongside computer science, performance and production have been a constant — and they've shaped how I communicate and lead.</p>
+      </div>
+      <div class="entry">
+        <h3>Child Actor</h3>
+        <p>Featured on national television channels. Gained hands-on experience in performance, communication, camera work, and working alongside production teams.</p>
+      </div>
+      <div class="entry">
+        <h3>School Drama Production</h3>
+        <p>Wrote, planned, directed, acted in, managed, and choreographed a school production — leading a team to a winning performance.</p>
+      </div>
+      <div class="entry">
+        <h3>College Event &amp; Production Work</h3>
+        <p>Supported event and production activities for college programmes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACHIEVEMENTS ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">// achievements &amp; certifications</span><h2>A few things I'm proud of</h2></div>
+      <div class="ach-grid">
+        <div class="ach-item"><h3>District-level athletics medalist</h3><p>Also competed in boxing at the district level.</p></div>
+        <div class="ach-item"><h3>School &amp; college certificates</h3><p>Multiple certificates across sports, marketing, and college activities.</p></div>
+        <div class="ach-item"><h3>AI learning &amp; certification</h3><p>Including IBM's Introduction to AI and an AI tools workshop.</p></div>
+        <div class="ach-item"><h3>Core strengths</h3><p>Communication, leadership, teamwork, writing, and a fast, project-based way of learning.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CURRENT LEARNING / FUTURE ============ -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">// right now &amp; next</span><h2>What I'm building toward</h2></div>
+      <div class="future-cols">
+        <div>
+          <h3>currently developing</h3>
+          <ul>
+            <li>Programming fundamentals, with Python as my main focus</li>
+            <li>AI/ML and data concepts, alongside coursework</li>
+            <li>Planning to start learning cybersecurity next</li>
+          </ul>
+        </div>
+        <div>
+          <h3>open to</h3>
+          <ul>
+            <li>Internships and part-time roles</li>
+            <li>Freelance work and gigs</li>
+            <li>Volunteering and competitions across tech, digital, web, and AI</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ CONTACT / FOOTER ============ -->
+<footer class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head"><span class="eyebrow">// contact</span><h2>Let's talk about what you're building.</h2><p>Open to internships, freelance work, part-time roles, and gigs across web development, AI, and digital work.</p></div>
+    <div class="contact-list">
+      <div class="contact-row"><span class="label">email</span><a class="value" href="mailto:prakhardubey769@gmail.com">prakhardubey769@gmail.com</a></div>
+      <div class="contact-row"><span class="label">phone</span><a class="value" href="tel:+919699424517">+91 96994 24517</a></div>
+      <div class="contact-row"><span class="label">github</span><a class="value" href="https://github.com/prakharok" target="_blank" rel="noopener">github.com/prakharok</a></div>
+      <div class="contact-row"><span class="label">linkedin</span><a class="value" href="https://www.linkedin.com/in/prakhar-dubey-918361343/" target="_blank" rel="noopener">in/prakhar-dubey-918361343</a></div>
+    </div>
+    <p class="foot-note">Prakhar Dubey — Mumbai, India</p>
+  </div>
+</footer>
+
+</body>
+</html>
